@@ -1,4 +1,4 @@
-# BJ100 (The Brice Jernigan Memorial 100) — Next.js & Topographical Map Edition
+# BJ100 (The Brice Jernigan Memorial 100) — Next.js Edition
 
 > **100 Miles. Two Disciplines. One Unbreakable Promise.**  
 > A premier 100-mile endurance showdown pitting **Ultra Trail Runners** against **Mountain Bikers** in San Diego's Los Peñasquitos Canyon (PQ Canyon) to raise money for suicide prevention in honor of Brice Jernigan.
@@ -7,13 +7,31 @@ Built with **Next.js (App Router)** & **React 19**.
 
 ---
 
-## 🗺️ New: Interactive Topographical Trail Map
+## 📅 Two Official Course Variations
 
-This branch features an official **Topographical Trail Map View** of the 100-mile course:
-- High-resolution cartographic map with contour lines and elevation shading of Los Peñasquitos Canyon, Del Mar Mesa, and Black Mountain.
-- Interactive **Waypoints Dossier**: Clickable waypoints detailing Carson's Crossing, Peñasquitos Waterfall, Del Mar Mesa Tunnels, Black Mountain Summit (1,554 ft), and Brice's Memorial Lookout Bench.
-- **Official GPX Download**: Direct download button for `BJ100_Official_Course.gpx` for GPS watches, Garmin, and bike computers.
-- Master Toggle between **Topographical Trail Map View** and **Elevation Profile & Segment Breakdown**.
+This branch (`course-topo-map`) provides interactive toggles for both course editions:
+
+### 1. 🌸 April 20 Spring Edition *(New!)*
+- **Race Date:** Monday, April 20
+- **Aid Station Spacing:** Strictly calibrated between **6 to 10 miles apart** (average 8.1 miles).
+- **Two 13-Mile Wilderness Crucibles:**
+  - **Crucible #1 (Mile 16.0 ➔ 29.0):** Carson's Crossing to Del Mar Mesa Ridge (13.0 Miles). Mandatory 2L hydration carry, no crew access.
+  - **Crucible #2 (Mile 45.0 ➔ 58.0):** Canyonside Central to Miner's Ridge Base (13.0 Miles). Mountain vert climb, mandatory headlamp inspection.
+- **Aid Stations:** 10 fully staffed stations + Start/Finish with complete cutoffs and provision schedules.
+- **GPX:** Includes dedicated [`public/BJ100_April20_Course.gpx`](public/BJ100_April20_Course.gpx).
+
+### 2. 🍂 October Fall Edition
+- **Race Date:** October 24-25
+- **Format:** 4 x 25-Mile Quad Circuit with 8 evenly distributed aid stations.
+- **GPX:** Includes [`public/BJ100_Official_Course.gpx`](public/BJ100_Official_Course.gpx).
+
+---
+
+## 🗺️ Cartographic & Topo Map Features
+
+- **Master View Switcher:** Toggle between **Aid Station Spacing Table**, **Topographical Trail Map View**, and **Elevation Profile Graph**.
+- **Interactive Waypoints Dossier:** Real-time elevation badges and route descriptions for Carson's Crossing, Peñasquitos Waterfall, Del Mar Mesa Tunnels, Black Mountain Summit (1,554 ft), and Brice's Memorial Lookout Bench.
+- **Direct GPX Downloads:** Garmin, Wahoo, and Coros compatible GPS files.
 
 ---
 
@@ -23,7 +41,7 @@ This branch features an official **Topographical Trail Map View** of the 100-mil
 # 1. Install dependencies
 npm install
 
-# 2. Run local dev server
+# 2. Run dev server
 npm run dev
 
 # 3. Open in browser
@@ -35,14 +53,6 @@ To create an optimized production build:
 npm run build
 npm run start
 ```
-
----
-
-## ⚡ Deployment to Vercel
-
-1. Import this repository [`ElijahBcodes/BJ100`](https://github.com/ElijahBcodes/BJ100) into [Vercel](https://vercel.com).
-2. Set the Branch to `course-topo-map`.
-3. Vercel automatically detects Next.js (`npm run build`). Click **Deploy**!
 
 ---
 

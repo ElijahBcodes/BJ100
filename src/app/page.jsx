@@ -90,6 +90,7 @@ export default function Home() {
   const [activeModal, setActiveModal] = useState(null);
   const [selectedMileForSponsor, setSelectedMileForSponsor] = useState(42);
   const [registerCategory, setRegisterCategory] = useState('mtb-solo');
+  const [selectedEdition, setSelectedEdition] = useState('april'); // 'april' or 'october'
   const [toasts, setToasts] = useState([]);
 
   // Load persisted tributes on mount
@@ -158,6 +159,8 @@ export default function Home() {
           totalRaised={totalRaised}
           onOpenRegister={openRegisterModal}
           onOpenDonate={() => setActiveModal('donate')}
+          selectedEdition={selectedEdition}
+          onSelectEdition={setSelectedEdition}
         />
 
         <PromiseMemorial
@@ -169,7 +172,10 @@ export default function Home() {
 
         <CalculatorSection onShowToast={showToast} />
 
-        <CourseSection />
+        <CourseSection
+          selectedEdition={selectedEdition}
+          onSelectEdition={setSelectedEdition}
+        />
 
         <RaceParty />
 
@@ -204,7 +210,6 @@ export default function Home() {
         onShowToast={showToast}
       />
 
-      {/* Floating Toast Alerts */}
       <div className="toast-container" aria-live="polite">
         {toasts.map((t) => (
           <div key={t.id} className="toast">

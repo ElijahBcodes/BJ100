@@ -2,30 +2,148 @@
 
 import { useState } from 'react';
 
+// April 20 Aid Stations Breakdown (6 to 10 miles apart, with two 13-mile stretches)
+const aprilAidStations = [
+  {
+    station: 'Start Line: Canyonside Park',
+    mile: 0.0,
+    split: 0.0,
+    isEndurance: false,
+    cutoffMtb: '6:00 AM Start',
+    cutoffRun: '5:00 AM Start',
+    crew: 'Full Access',
+    supplies: 'Packet Pickup, Coffee, Electrolytes'
+  },
+  {
+    station: 'Aid 1: Adobe Ranch House',
+    mile: 8.5,
+    split: 8.5,
+    isEndurance: false,
+    cutoffMtb: '7:15 AM',
+    cutoffRun: '7:30 AM',
+    crew: 'Spectators Only',
+    supplies: 'Water, Skratch Labs, Oranges, Bananas'
+  },
+  {
+    station: "Aid 2: Carson's Crossing",
+    mile: 16.0,
+    split: 7.5,
+    isEndurance: false,
+    cutoffMtb: '8:15 AM',
+    cutoffRun: '9:45 AM',
+    crew: 'Crew Allowed',
+    supplies: 'Drop Bags #1, PB&J, Pretzels, Water Refill'
+  },
+  {
+    station: 'Aid 3: Del Mar Mesa Ridge',
+    mile: 29.0,
+    split: 13.0,
+    isEndurance: true,
+    stretchLabel: '13-MILE WILDERNESS STRETCH #1',
+    cutoffMtb: '10:05 AM',
+    cutoffRun: '1:45 PM',
+    crew: 'NO CREW ACCESS',
+    supplies: 'Hot Broth, Quesadillas, Salt Tablets, First Aid'
+  },
+  {
+    station: 'Aid 4: Lopez Canyon Junction',
+    mile: 37.5,
+    split: 8.5,
+    isEndurance: false,
+    cutoffMtb: '11:15 AM',
+    cutoffRun: '4:15 PM',
+    crew: 'Spectators Only',
+    supplies: 'Ice Buckets, Cold Water, Watermelon, Gels'
+  },
+  {
+    station: 'Aid 5: Canyonside Central Hub',
+    mile: 45.0,
+    split: 7.5,
+    isEndurance: false,
+    cutoffMtb: '12:15 PM',
+    cutoffRun: '6:30 PM',
+    crew: 'Major Crew & Drop Bags',
+    supplies: 'Drop Bags #2, Hot Pasta, Foot Care, Pacer Prep'
+  },
+  {
+    station: "Aid 6: Miner's Ridge Base",
+    mile: 58.0,
+    split: 13.0,
+    isEndurance: true,
+    stretchLabel: '13-MILE MOUNTAIN ASCENT STRETCH #2',
+    cutoffMtb: '2:15 PM',
+    cutoffRun: '10:30 PM',
+    crew: 'Pacer Handoff Only',
+    supplies: 'Bacon, Boiled Potatoes, Hot Soup, Coffee'
+  },
+  {
+    station: 'Aid 7: Black Mountain East Peak',
+    mile: 66.5,
+    split: 8.5,
+    isEndurance: false,
+    cutoffMtb: '3:45 PM',
+    cutoffRun: '1:00 AM (Mon)',
+    crew: 'NO CREW (High Peak)',
+    supplies: 'Wind Shelter, Electrolytes, Ginger Ale, Gels'
+  },
+  {
+    station: 'Aid 8: Sycamore Canyon',
+    mile: 75.0,
+    split: 8.5,
+    isEndurance: false,
+    cutoffMtb: '4:55 PM',
+    cutoffRun: '3:30 AM (Mon)',
+    crew: 'Crew Allowed',
+    supplies: 'Grilled Cheese, Broth, Drop Bags #3'
+  },
+  {
+    station: 'Aid 9: Duck Pond Overlook',
+    mile: 83.0,
+    split: 8.0,
+    isEndurance: false,
+    cutoffMtb: '6:00 PM',
+    cutoffRun: '6:00 AM (Mon)',
+    crew: 'Spectators Only',
+    supplies: 'Hot Cider, Pretzels, Electrolytes'
+  },
+  {
+    station: "Aid 10: Brice's Memorial Lookout",
+    mile: 91.5,
+    split: 8.5,
+    isEndurance: false,
+    cutoffMtb: '7:00 PM',
+    cutoffRun: '8:30 AM (Mon)',
+    crew: 'Trail Bell Ceremony',
+    supplies: 'Toast to Brice, Fresh Fruit, High Fives'
+  },
+  {
+    station: 'Finish Line: Canyonside Festival',
+    mile: 100.0,
+    split: 8.5,
+    isEndurance: false,
+    cutoffMtb: '8:00 PM (14h Cutoff)',
+    cutoffRun: '11:00 AM Mon (30h Cutoff)',
+    crew: 'Full Party Access',
+    supplies: 'Belt Buckles, Baja Tacos, Cold Craft Beers!'
+  }
+];
+
 const waypoints = [
   {
     id: 'carsons',
     name: "Carson's Crossing",
-    mile: 'Mile 6.2 & 14.8',
+    mile: 'Mile 16.0 (April) / Mile 6.2 (Oct)',
     elevation: '95 ft',
-    type: 'Aid Station 1 & 2',
-    desc: 'Creek crossing on the canyon floor. First major drop bag zone with cold electrolyte refills and medical check.'
+    type: 'Major Aid Station & Drop Bags',
+    desc: 'Creek crossing on the canyon floor. Gateway to the first 13-mile wilderness stretch across Del Mar Mesa.'
   },
   {
-    id: 'waterfall',
-    name: 'Peñasquitos Canyon Waterfall',
-    mile: 'Mile 10.4',
-    elevation: '62 ft',
-    type: 'Landmark / Scenic Checkpoint',
-    desc: 'The iconic volcanic rock cascade where Peñasquitos Creek carves through canyon bedrock. Slick granite boulders require careful footing.'
-  },
-  {
-    id: 'tunnels',
-    name: 'Del Mar Mesa "Tunnels"',
-    mile: 'Mile 28.5',
-    elevation: '410 ft',
-    type: 'Technical Singletrack',
-    desc: 'Canopy of coastal chaparral with punchy sandstone shelves, exposed roots, and twisting curves favored by local MTB riders.'
+    id: 'stretch1',
+    name: '13-Mile Mesa Wilderness Section',
+    mile: 'Mile 16.0 ➔ Mile 29.0',
+    elevation: '95 ft ➔ 410 ft',
+    type: 'Endurance Wilderness Stretch #1',
+    desc: '13 uninterrupted miles across sandstone shelves and chaparral tunnels with zero crew access. Mandatory 2L hydration carry.'
   },
   {
     id: 'summit',
@@ -36,93 +154,27 @@ const waypoints = [
     desc: 'The defining vertical grind of the 100-mile loop. Sweeping 360-degree views stretching from Mount Baldy to the Pacific Ocean horizon.'
   },
   {
+    id: 'stretch2',
+    name: '13-Mile Mountain Ascent Section',
+    mile: 'Mile 45.0 ➔ Mile 58.0',
+    elevation: '48 ft ➔ 520 ft',
+    type: 'Endurance Wilderness Stretch #2',
+    desc: '13 miles climbing out of the central canyon into Black Mountain foothills. High vert, remote rocky singletrack.'
+  },
+  {
     id: 'memorial',
     name: "Brice's Memorial Lookout Bench",
-    mile: 'Mile 92.0',
+    mile: 'Mile 91.5 (April) / Mile 92.0 (Oct)',
     elevation: '240 ft',
     type: 'Sacred Memorial Waypoint',
     desc: "Brice's favorite sunset view over PQ Canyon. Every racer stops to ring the honorary bronze trail bell before sprinting toward the finish line."
   }
 ];
 
-const segmentsData = {
-  1: {
-    badge: 'SEGMENT 1 OF 4 (LOOP START)',
-    title: 'Canyon Floor & The Sycamore Canopy',
-    desc: 'Starting at Canyonside Community Park, competitors dive into the cool coastal air of lower Peñasquitos Canyon. Shaded oak and sycamore canopies provide smooth flow for bikes and steady rhythm for runners alongside Peñasquitos Creek.',
-    gain: '+1,850 ft / -1,850 ft',
-    landmarks: "Carson's Crossing, Historic Adobe Ranch House",
-    mtbDiff: 'Moderate Flow (Avg 14.5 mph)',
-    runDiff: 'Fast banking flat trail; preserve energy',
-    aid: [
-      'Mile 6.2: Adobe Ranch (Full Water/Electrolytes)',
-      'Mile 14.8: Carson’s Bridge (Drop Bags & Hot Broth)',
-      'Mile 21.0: Wagon Wheel (Medical & Cold Sponge)'
-    ],
-    pathD: 'M 50,165 Q 120,150 170,120 T 260,140 T 360,95 T 470,155 L 470,170 L 50,170 Z',
-    point1: { cx: 260, cy: 140, label: 'Peñasquitos Waterfall' },
-    point2: { cx: 360, cy: 95, label: 'Lopez Ridge Climb' }
-  },
-  2: {
-    badge: 'SEGMENT 2 OF 4 (TECHNICAL MESAS)',
-    title: 'Del Mar Mesa & Cobblestone Climb',
-    desc: 'The course punches steeply up onto the Del Mar Mesa. Famous for technical sandstone steps, dry brush tunnels, and steep punchy climbs that test bike power and runner leg turn-over.',
-    gain: '+2,920 ft / -2,400 ft',
-    landmarks: 'Cobblestone Ridge, Mesa Tunnels, Duck Pond Overlook',
-    mtbDiff: 'Technical High (Avg 10.2 mph - watch pedal strikes)',
-    runDiff: 'Challenging uneven rocks; watch ankle rolling',
-    aid: [
-      'Mile 32.5: Del Mar Mesa Overlook (Spring Water & PB&J)',
-      'Mile 41.0: Powerline Fire Road (Energy Gels & Salt Pills)',
-      'Mile 48.2: Camel\'s Back Ridge (Ice Buckets & Medical)'
-    ],
-    pathD: 'M 50,160 Q 110,90 190,60 T 310,120 T 400,50 T 470,140 L 470,170 L 50,170 Z',
-    point1: { cx: 190, cy: 60, label: 'Mesa Tunnels' },
-    point2: { cx: 400, cy: 50, label: 'Cobblestone Summit' }
-  },
-  3: {
-    badge: 'SEGMENT 3 OF 4 (THE VERT GRIND)',
-    title: 'Black Mountain & Nighthawk Summit Climb',
-    desc: 'The true separator of the race. Climbs past Miner\'s Ridge to the exposed crown of Black Mountain. Sweeping 360-degree views of the Pacific Ocean and San Diego backcountry with relentless headwinds.',
-    gain: '+3,650 ft / -3,400 ft',
-    landmarks: "Miner's Ridge Trail, Black Mountain Summit, Glider Point",
-    mtbDiff: 'Severe Grade (Avg 8.8 mph - high cadence required)',
-    runDiff: 'Power-hike zone; trekking poles recommended',
-    aid: [
-      'Mile 56.4: Miner\'s Ridge Base (Soup, Bacon, Potatoes)',
-      'Mile 63.8: Black Mountain Summit (Water only & Timing Mat)',
-      'Mile 72.0: Hilltop Community Staging (Pacer Hand-off)'
-    ],
-    pathD: 'M 50,165 Q 120,130 180,80 T 290,25 T 390,90 T 470,150 L 470,170 L 50,170 Z',
-    point1: { cx: 290, cy: 25, label: 'Black Mtn Summit (1,554\')' },
-    point2: { cx: 390, cy: 90, label: 'Glider Drop' }
-  },
-  4: {
-    badge: 'SEGMENT 4 OF 4 (BRICE\'S OVERLOOK & HOME)',
-    title: 'Brice\'s Memorial Lookout & The Finish Stretch',
-    desc: 'The final homeward descent sweeps right past Brice\'s favorite trail bench in PQ Canyon. Racers ring the memorial trail bell at Mile 92 before a flying sprint through the eucalyptus grove into the cheering festival crowd.',
-    gain: '+3,060 ft / -3,780 ft',
-    landmarks: 'Brice\'s Memorial Bench, Waterfall Crossing, Canyonside Finish',
-    mtbDiff: 'Fast Flow & Loose Corners (Avg 13.8 mph)',
-    runDiff: 'Dig deep; downhill quad buster into finish',
-    aid: [
-      'Mile 82.5: Lopez Ridge Aid (Quesadillas, Ginger Ale)',
-      'Mile 92.0: Brice\'s Rock Memorial Station (Trail Bell & Toast)',
-      'Mile 100.0: The Finish Line Festival at Canyonside Park!'
-    ],
-    pathD: 'M 50,140 Q 140,85 220,110 T 320,70 T 420,160 T 470,165 L 470,170 L 50,170 Z',
-    point1: { cx: 320, cy: 70, label: 'Brice\'s Memorial Bench' },
-    point2: { cx: 470, cy: 165, label: 'Finish Line 🎉' }
-  }
-};
-
-export default function CourseSection() {
-  const [courseView, setCourseView] = useState('topo'); // 'topo' or 'elevation'
-  const [activeSeg, setActiveSeg] = useState(1);
+export default function CourseSection({ selectedEdition = 'april', onSelectEdition }) {
+  const [courseView, setCourseView] = useState('spacing'); // 'spacing', 'topo', or 'elevation'
   const [selectedWaypoint, setSelectedWaypoint] = useState(waypoints[0]);
   const [isZoomed, setIsZoomed] = useState(false);
-
-  const cur = segmentsData[activeSeg];
 
   return (
     <section className="section course-section" id="course">
@@ -131,11 +183,37 @@ export default function CourseSection() {
           <div className="section-tag">BRICE&apos;S BACKYARD • SAN DIEGO, CA</div>
           <h2 className="section-title">The Los Peñasquitos Canyon 100 Course</h2>
           <p className="section-subtitle">
-            Four loops of 25 miles through the iconic Los Peñasquitos Canyon Preserve, Del Mar Mesa, and Black Mountain (+11,480 ft vert).
+            A 100-mile journey through Los Peñasquitos Canyon Preserve, Del Mar Mesa, and Black Mountain (+11,480 ft vert). We offer two official course variations to suit spring and fall race conditions.
           </p>
 
-          {/* Master View Mode Switcher */}
+          {/* Master Course Edition Selector */}
+          <div className="edition-toggle-bar">
+            <button
+              type="button"
+              className={`edition-tab-btn ${selectedEdition === 'april' ? 'active' : ''}`}
+              onClick={() => onSelectEdition && onSelectEdition('april')}
+            >
+              <span>🌸 April 20 Edition (Two 13M Stretches)</span>
+            </button>
+            <button
+              type="button"
+              className={`edition-tab-btn ${selectedEdition === 'october' ? 'active' : ''}`}
+              onClick={() => onSelectEdition && onSelectEdition('october')}
+            >
+              <span>🍂 October Edition (Quad-Loop)</span>
+            </button>
+          </div>
+
+          {/* View Mode Switcher */}
           <div className="course-view-switch-row">
+            <button
+              type="button"
+              className={`view-switch-btn ${courseView === 'spacing' ? 'active' : ''}`}
+              onClick={() => setCourseView('spacing')}
+            >
+              <span>📋</span>
+              <span>Aid Stations Spacing & Mile Breakdown</span>
+            </button>
             <button
               type="button"
               className={`view-switch-btn ${courseView === 'topo' ? 'active' : ''}`}
@@ -150,7 +228,7 @@ export default function CourseSection() {
               onClick={() => setCourseView('elevation')}
             >
               <span>📈</span>
-              <span>Elevation Profile & Segments</span>
+              <span>Elevation Profile (11,480&apos; Vert)</span>
             </button>
           </div>
         </div>
@@ -158,9 +236,9 @@ export default function CourseSection() {
         {/* Quick Facts Strip */}
         <div className="course-stats-grid">
           <div className="course-stat-card">
-            <span className="cs-num">100.2</span>
+            <span className="cs-num">100.0</span>
             <span className="cs-unit">Miles</span>
-            <span className="cs-label">Certified Loop Route</span>
+            <span className="cs-label">Certified Course Distance</span>
           </div>
           <div className="course-stat-card">
             <span className="cs-num">11,480</span>
@@ -168,31 +246,227 @@ export default function CourseSection() {
             <span className="cs-label">Elevation Gain</span>
           </div>
           <div className="course-stat-card">
-            <span className="cs-num">1,554&apos;</span>
-            <span className="cs-unit">Peak</span>
-            <span className="cs-label">Black Mountain Peak</span>
+            <span className="cs-num">
+              {selectedEdition === 'april' ? '6-10 Mi' : '6.2 Mi'}
+            </span>
+            <span className="cs-unit">Avg</span>
+            <span className="cs-label">Standard Station Spacing</span>
           </div>
           <div className="course-stat-card">
-            <span className="cs-num">8</span>
-            <span className="cs-unit">Stations</span>
-            <span className="cs-label">Fully Stocked Aid Stations</span>
+            <span className="cs-num">
+              {selectedEdition === 'april' ? '2' : '0'}
+            </span>
+            <span className="cs-unit">Stretches</span>
+            <span className="cs-label">13-Mile Wilderness Legs</span>
           </div>
         </div>
 
-        {/* VIEW 1: TOPOGRAPHICAL MAP VIEW */}
+        {/* =========================================================================
+            VIEW 1: AID STATIONS SPACING & MILE BREAKDOWN (APRIL 20 FOCUS)
+           ========================================================================= */}
+        {courseView === 'spacing' && (
+          <div className="animate-fade-in">
+            {selectedEdition === 'april' ? (
+              <div className="glass-panel" style={{ padding: '2.5rem' }}>
+                <div className="edition-banner-notice">
+                  <div className="edition-banner-text">
+                    <strong>RACE DATE: APRIL 20 • AID STATION BLUEPRINT</strong>
+                    <p>
+                      Calibrated for optimal hydration and endurance pacing. Aid stations are spaced between <strong>6 and 10 miles apart</strong> (averaging 8.1 miles), featuring <strong>two premier 13-mile wilderness stretches</strong> that test true self-sufficiency.
+                    </p>
+                  </div>
+                  <a
+                    href="/BJ100_April20_Course.gpx"
+                    download="BJ100_April20_Course.gpx"
+                    className="btn btn-primary btn-sm"
+                  >
+                    <span>Download April 20 GPX</span>
+                  </a>
+                </div>
+
+                {/* The Two 13-Mile Wilderness Stretches Callout Cards */}
+                <div className="stretches-feature-grid">
+                  <div className="stretch-warning-card">
+                    <div className="swc-header">
+                      <span className="swc-badge">ENDURANCE CRUCIBLE #1</span>
+                      <span className="swc-distance">13.0 MILES</span>
+                    </div>
+                    <h4>Carson&apos;s Crossing (Mi 16.0) ➔ Del Mar Mesa (Mi 29.0)</h4>
+                    <p>
+                      The first major separation test. Takes athletes through technical sandstone cobbles and brush tunnels under direct midday sun with zero outside crew access.
+                    </p>
+                    <ul className="swc-reqs">
+                      <li>⚠️ Mandatory minimum 2.0L fluid capacity required at Aid 2</li>
+                      <li>⚠️ Minimum 4 energy gels / 500 kcal fuel carry</li>
+                      <li>⚠️ No crew vehicles allowed on Del Mar Mesa trailheads</li>
+                    </ul>
+                  </div>
+
+                  <div className="stretch-warning-card">
+                    <div className="swc-header">
+                      <span className="swc-badge">ENDURANCE CRUCIBLE #2</span>
+                      <span className="swc-distance">13.0 MILES</span>
+                    </div>
+                    <h4>Canyonside Central (Mi 45.0) ➔ Miner&apos;s Ridge (Mi 58.0)</h4>
+                    <p>
+                      The climb into the Black Mountain massif. Transitioning from canyon floor into steep, exposed mountain foothills as night falls.
+                    </p>
+                    <ul className="swc-reqs">
+                      <li>⚠️ Mandatory headlamp inspection at Aid 5 (Canyonside)</li>
+                      <li>⚠️ Emergency space blanket & wind jacket required</li>
+                      <li>⚠️ Pacer pickup allowed at Miner&apos;s Ridge Base</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Full Aid Station Spacing Table */}
+                <div className="aid-table-wrap">
+                  <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem' }}>
+                    April 20 Aid Stations & Mileage Schedule
+                  </h3>
+
+                  <div className="table-responsive">
+                    <table className="showdown-table">
+                      <thead>
+                        <tr>
+                          <th>Check / Station</th>
+                          <th>Course Mile</th>
+                          <th>Leg Distance</th>
+                          <th>Spacing Type</th>
+                          <th>MTB Cutoff</th>
+                          <th>Runner Cutoff</th>
+                          <th>Crew & Drop Bags</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {aprilAidStations.map((st) => (
+                          <tr
+                            key={st.station}
+                            style={st.isEndurance ? { background: 'rgba(249, 115, 22, 0.08)' } : {}}
+                          >
+                            <td>
+                              <strong>{st.station}</strong>
+                            </td>
+                            <td>
+                              <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800 }}>
+                                Mile {st.mile.toFixed(1)}
+                              </span>
+                            </td>
+                            <td>
+                              {st.split === 0 ? (
+                                <span style={{ color: '#64748b' }}>Start</span>
+                              ) : (
+                                <strong>+{st.split.toFixed(1)} mi</strong>
+                              )}
+                            </td>
+                            <td>
+                              {st.split === 0 ? (
+                                <span style={{ color: '#64748b' }}>—</span>
+                              ) : st.isEndurance ? (
+                                <span className="spacing-pill-endurance">
+                                  ⚡ 13.0 MI STRETCH
+                                </span>
+                              ) : (
+                                <span className="spacing-pill-normal">
+                                  ✓ {st.split.toFixed(1)} mi (6-10 range)
+                                </span>
+                              )}
+                            </td>
+                            <td>{st.cutoffMtb}</td>
+                            <td>{st.cutoffRun}</td>
+                            <td style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                              {st.crew} • {st.supplies}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* October Edition Spacing */
+              <div className="glass-panel" style={{ padding: '2.5rem' }}>
+                <div className="edition-banner-notice">
+                  <div className="edition-banner-text">
+                    <strong>RACE DATE: OCTOBER 24-25 • STANDARD QUAD-LOOP SPACING</strong>
+                    <p>
+                      Four repeating 25-mile loops with 8 evenly stocked aid stations spaced approximately every 6 to 8 miles around the canyon perimeter.
+                    </p>
+                  </div>
+                  <a
+                    href="/BJ100_Official_Course.gpx"
+                    download="BJ100_Official_Course.gpx"
+                    className="btn btn-primary btn-sm"
+                  >
+                    <span>Download October GPX</span>
+                  </a>
+                </div>
+
+                <div className="table-responsive">
+                  <table className="showdown-table">
+                    <thead>
+                      <tr>
+                        <th>Station</th>
+                        <th>Loop Marker</th>
+                        <th>Split</th>
+                        <th>Support</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Canyonside Park (Main Hub)</strong></td>
+                        <td>Mile 0, 25, 50, 75, 100</td>
+                        <td>Start & Lap Hub</td>
+                        <td>Full Crew, Drop Bags, Hot Food, Medical</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Adobe Ranch House</strong></td>
+                        <td>Mile 6.2, 31.2, 56.2, 81.2</td>
+                        <td>+6.2 mi</td>
+                        <td>Water, Electrolytes, Fruit, PB&J</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Carson’s Bridge Crossing</strong></td>
+                        <td>Mile 14.8, 39.8, 64.8, 89.8</td>
+                        <td>+8.6 mi</td>
+                        <td>Drop Bags, Hot Broth, Potatoes</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Wagon Wheel / Lopez</strong></td>
+                        <td>Mile 21.0, 46.0, 71.0, 96.0</td>
+                        <td>+6.2 mi</td>
+                        <td>Cold Sponges, Ice, Pretzels, Gels</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* =========================================================================
+            VIEW 2: TOPOGRAPHICAL TRAIL MAP VIEW
+           ========================================================================= */}
         {courseView === 'topo' && (
           <div className="topo-map-container animate-fade-in">
             <div className="topo-map-card glass-panel">
               <div className="topo-map-header">
                 <div>
                   <span className="topo-badge">OFFICIAL CARTOGRAPHIC ROUTE</span>
-                  <h3>Los Peñasquitos Canyon & Black Mountain Topo Map</h3>
-                  <p>Detailed contour lines, technical mesa singletrack, canyon crossings, and summit climbs.</p>
+                  <h3>
+                    Los Peñasquitos Canyon & Black Mountain Topo Map
+                    {selectedEdition === 'april' ? ' (April 20)' : ' (Oct 24-25)'}
+                  </h3>
+                  <p>
+                    Detailed contour lines showing canyon singletrack, Del Mar Mesa, and the two 13-mile endurance stretches.
+                  </p>
                 </div>
                 <div className="topo-header-actions">
                   <a
-                    href="/BJ100_Official_Course.gpx"
-                    download="BJ100_Official_Course.gpx"
+                    href={selectedEdition === 'april' ? '/BJ100_April20_Course.gpx' : '/BJ100_Official_Course.gpx'}
+                    download={selectedEdition === 'april' ? 'BJ100_April20_Course.gpx' : 'BJ100_Official_Course.gpx'}
                     className="btn btn-primary btn-sm"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -221,15 +495,15 @@ export default function CourseSection() {
                 <div className="topo-overlay-legend">
                   <div className="tol-item">
                     <span className="tol-line orange-line"></span>
-                    <span>100-Mile Quad Loop Path</span>
+                    <span>100-Mile Race Route</span>
                   </div>
                   <div className="tol-item">
                     <span className="tol-line cyan-line"></span>
-                    <span>Canyon Connector Trails</span>
+                    <span>Canyon Connectors</span>
                   </div>
                   <div className="tol-item">
                     <span className="tol-dot"></span>
-                    <span>Key Waypoints & Aid Stations</span>
+                    <span>10 Aid Stations (6-10 mi & Two 13M Stretches)</span>
                   </div>
                 </div>
               </div>
@@ -290,118 +564,59 @@ export default function CourseSection() {
           </div>
         )}
 
-        {/* VIEW 2: ELEVATION & SEGMENTS VIEW */}
+        {/* =========================================================================
+            VIEW 3: ELEVATION PROFILE
+           ========================================================================= */}
         {courseView === 'elevation' && (
-          <div className="course-interactive-container animate-fade-in">
-            <div className="course-nav-tabs" role="tablist">
-              <button
-                type="button"
-                className={`course-tab ${activeSeg === 1 ? 'active' : ''}`}
-                onClick={() => setActiveSeg(1)}
-              >
-                <span className="tab-mile">Mi 0 - 25</span>
-                <span className="tab-title">Canyon Floor & Sycamore Canopy</span>
-              </button>
-              <button
-                type="button"
-                className={`course-tab ${activeSeg === 2 ? 'active' : ''}`}
-                onClick={() => setActiveSeg(2)}
-              >
-                <span className="tab-mile">Mi 25 - 50</span>
-                <span className="tab-title">Del Mar Mesa & Cobblestones</span>
-              </button>
-              <button
-                type="button"
-                className={`course-tab ${activeSeg === 3 ? 'active' : ''}`}
-                onClick={() => setActiveSeg(3)}
-              >
-                <span className="tab-mile">Mi 50 - 75</span>
-                <span className="tab-title">Black Mountain Ridge Climb</span>
-              </button>
-              <button
-                type="button"
-                className={`course-tab ${activeSeg === 4 ? 'active' : ''}`}
-                onClick={() => setActiveSeg(4)}
-              >
-                <span className="tab-mile">Mi 75 - 100</span>
-                <span className="tab-title">Brice&apos;s Memorial Lookout & Home</span>
-              </button>
-            </div>
+          <div className="glass-panel animate-fade-in" style={{ padding: '2.5rem' }}>
+            <h3 style={{ fontSize: '1.6rem', marginBottom: '0.8rem' }}>
+              Course Elevation Profile (+11,480 ft Total Vert)
+            </h3>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '1.8rem' }}>
+              From the coastal eucalyptus canopy of Peñasquitos Creek (48 ft) to the technical crown of Black Mountain (1,554 ft).
+            </p>
 
-            <div className="course-segment-card glass-panel" id="segment-display-card">
-              <div className="segment-details">
-                <div className="segment-badge">{cur.badge}</div>
-                <h3 className="segment-heading">{cur.title}</h3>
-                <p className="segment-desc">{cur.desc}</p>
+            <div className="elevation-graphic">
+              <svg viewBox="0 0 500 200" className="elevation-svg">
+                <line x1="50" y1="30" x2="470" y2="30" stroke="rgba(255,255,255,0.08)" strokeDasharray="4"/>
+                <line x1="50" y1="80" x2="470" y2="80" stroke="rgba(255,255,255,0.08)" strokeDasharray="4"/>
+                <line x1="50" y1="130" x2="470" y2="130" stroke="rgba(255,255,255,0.08)" strokeDasharray="4"/>
+                <line x1="50" y1="170" x2="470" y2="170" stroke="rgba(255,255,255,0.15)"/>
 
-                <div className="segment-highlights-grid">
-                  <div className="sh-item">
-                    <span className="sh-label">Elevation Profile:</span>
-                    <strong>{cur.gain}</strong>
-                  </div>
-                  <div className="sh-item">
-                    <span className="sh-label">Key Landmarks:</span>
-                    <strong>{cur.landmarks}</strong>
-                  </div>
-                  <div className="sh-item">
-                    <span className="sh-label">MTB Difficulty:</span>
-                    <strong>{cur.mtbDiff}</strong>
-                  </div>
-                  <div className="sh-item">
-                    <span className="sh-label">Run Strategy:</span>
-                    <strong>{cur.runDiff}</strong>
-                  </div>
-                </div>
+                <defs>
+                  <linearGradient id="elevGradMaster" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.45"/>
+                    <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.02"/>
+                  </linearGradient>
+                </defs>
 
-                <div className="aid-stations-list">
-                  <h4>Aid Stations on this Segment:</h4>
-                  <div className="aid-tags">
-                    {cur.aid.map((a) => (
-                      <span key={a} className="aid-tag">{a}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                <path
+                  d="M 50,165 Q 110,140 160,95 T 240,150 T 320,30 T 400,120 T 470,165 L 470,170 L 50,170 Z"
+                  fill="url(#elevGradMaster)"
+                  stroke="#f59e0b"
+                  strokeWidth="3"
+                />
 
-              <div className="segment-visual">
-                <div className="elevation-graphic">
-                  <svg viewBox="0 0 500 200" className="elevation-svg">
-                    <line x1="50" y1="30" x2="470" y2="30" stroke="rgba(255,255,255,0.08)" strokeDasharray="4"/>
-                    <line x1="50" y1="80" x2="470" y2="80" stroke="rgba(255,255,255,0.08)" strokeDasharray="4"/>
-                    <line x1="50" y1="130" x2="470" y2="130" stroke="rgba(255,255,255,0.08)" strokeDasharray="4"/>
-                    <line x1="50" y1="170" x2="470" y2="170" stroke="rgba(255,255,255,0.15)"/>
+                <circle cx="160" cy="95" r="5" fill="#38bdf8"/>
+                <text x="160" y="80" textAnchor="middle" fill="#38bdf8" fontSize="11" fontWeight="600">
+                  Del Mar Mesa (410&apos;)
+                </text>
 
-                    <defs>
-                      <linearGradient id={`elevGrad-${activeSeg}`} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.45"/>
-                        <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.02"/>
-                      </linearGradient>
-                    </defs>
+                <circle cx="320" cy="30" r="5" fill="#ef4444"/>
+                <text x="320" y="18" textAnchor="middle" fill="#ef4444" fontSize="11" fontWeight="600">
+                  Black Mtn Peak (1,554&apos;)
+                </text>
 
-                    <path
-                      d={cur.pathD}
-                      fill={`url(#elevGrad-${activeSeg})`}
-                      stroke="#f59e0b"
-                      strokeWidth="3"
-                    />
-
-                    <circle cx={cur.point1.cx} cy={cur.point1.cy} r="5" fill="#38bdf8"/>
-                    <text x={cur.point1.cx} y={cur.point1.cy - 12} textAnchor="middle" fill="#38bdf8" fontSize="11" fontWeight="600">
-                      {cur.point1.label}
-                    </text>
-
-                    <circle cx={cur.point2.cx} cy={cur.point2.cy} r="5" fill="#ef4444"/>
-                    <text x={cur.point2.cx} y={cur.point2.cy - 12} textAnchor="middle" fill="#ef4444" fontSize="11" fontWeight="600">
-                      {cur.point2.label}
-                    </text>
-                  </svg>
-                  <div className="elevation-axis-labels">
-                    <span>Start of Segment</span>
-                    <span>Aid Station Check</span>
-                    <span>Landmark Pass</span>
-                    <span>End of Segment</span>
-                  </div>
-                </div>
+                <circle cx="420" cy="130" r="5" fill="#f59e0b"/>
+                <text x="420" y="115" textAnchor="middle" fill="#f59e0b" fontSize="11" fontWeight="600">
+                  Brice&apos;s Bench (240&apos;)
+                </text>
+              </svg>
+              <div className="elevation-axis-labels">
+                <span>Start (Mile 0)</span>
+                <span>13M Stretch #1 (Mi 16-29)</span>
+                <span>13M Stretch #2 & Peak (Mi 45-58)</span>
+                <span>Finish (Mile 100)</span>
               </div>
             </div>
           </div>

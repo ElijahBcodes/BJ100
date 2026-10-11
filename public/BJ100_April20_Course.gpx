@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="The Brice Jernigan 100 April 20 Edition" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>The Brice Jernigan 100 - April 20 Endurance Edition (Two 13-Mile Stretches)</name>
+    <desc>Official 100-Mile Course for April 20. Aid stations spaced 6-10 miles apart with two premier 13-mile wilderness stretches.</desc>
+    <time>2027-04-20T06:00:00Z</time>
+  </metadata>
+  <wpt lat="32.9298" lon="-117.1472"><ele>48</ele><name>Start / Finish - Canyonside Park</name><desc>Mile 0.0 &amp; Mile 100.0. Main festival hub.</desc></wpt>
+  <wpt lat="32.9270" lon="-117.1600"><ele>70</ele><name>Aid 1: Adobe Ranch House</name><desc>Mile 8.5 (+8.5 mi from start). Water &amp; fruit.</desc></wpt>
+  <wpt lat="32.9241" lon="-117.1895"><ele>95</ele><name>Aid 2: Carson's Crossing</name><desc>Mile 16.0 (+7.5 mi). Drop bags. WARNING: 13-MILE STRETCH AHEAD.</desc></wpt>
+  <wpt lat="32.9090" lon="-117.1720"><ele>410</ele><name>Aid 3: Del Mar Mesa Ridge</name><desc>Mile 29.0 (+13.0 mi endurance stretch). Full hot food &amp; electrolytes.</desc></wpt>
+  <wpt lat="32.9150" lon="-117.1550"><ele>180</ele><name>Aid 4: Lopez Canyon Junction</name><desc>Mile 37.5 (+8.5 mi). Cold sponges &amp; medical.</desc></wpt>
+  <wpt lat="32.9298" lon="-117.1472"><ele>48</ele><name>Aid 5: Canyonside Central Hub</name><desc>Mile 45.0 (+7.5 mi). Major crew access. WARNING: 13-MILE MOUNTAIN STRETCH AHEAD.</desc></wpt>
+  <wpt lat="32.9550" lon="-117.1350"><ele>520</ele><name>Aid 6: Miner's Ridge Base</name><desc>Mile 58.0 (+13.0 mi mountain stretch). Soup &amp; pacer handoff.</desc></wpt>
+  <wpt lat="32.9818" lon="-117.1205"><ele>1554</ele><name>Aid 7: Black Mountain East Peak</name><desc>Mile 66.5 (+8.5 mi). High altitude water refill &amp; timing mat.</desc></wpt>
+  <wpt lat="32.9450" lon="-117.1400"><ele>210</ele><name>Aid 8: Sycamore Canyon</name><desc>Mile 75.0 (+8.5 mi). Quesadillas &amp; ginger ale.</desc></wpt>
+  <wpt lat="32.9215" lon="-117.1800"><ele>120</ele><name>Aid 9: Duck Pond Overlook</name><desc>Mile 83.0 (+8.0 mi). Night lights &amp; warm broth.</desc></wpt>
+  <wpt lat="32.9340" lon="-117.1610"><ele>240</ele><name>Aid 10: Brice's Memorial Lookout</name><desc>Mile 91.5 (+8.5 mi). Final aid station before finish sprint. Ring the bell!</desc></wpt>
+</gpx>

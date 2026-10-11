@@ -2,11 +2,22 @@
 
 import { useState, useEffect } from 'react';
 
-export default function Hero({ totalRaised, onOpenRegister, onOpenDonate }) {
-  const [daysLeft, setDaysLeft] = useState(246);
+export default function Hero({
+  totalRaised,
+  onOpenRegister,
+  onOpenDonate,
+  selectedEdition = 'april',
+  onSelectEdition
+}) {
+  const [daysLeft, setDaysLeft] = useState(191);
 
   useEffect(() => {
-    const targetDate = new Date('2026-10-24T06:00:00-07:00').getTime();
+    // April 20 or October 24
+    const targetString = selectedEdition === 'april'
+      ? '2027-04-20T06:00:00-07:00'
+      : '2026-10-24T06:00:00-07:00';
+    const targetDate = new Date(targetString).getTime();
+
     const updateCountdown = () => {
       const now = new Date().getTime();
       const diff = targetDate - now;
@@ -16,10 +27,11 @@ export default function Hero({ totalRaised, onOpenRegister, onOpenDonate }) {
         setDaysLeft(0);
       }
     };
+
     updateCountdown();
     const timer = setInterval(updateCountdown, 60000);
     return () => clearInterval(timer);
-  }, []);
+  }, [selectedEdition]);
 
   return (
     <section className="hero-section" id="hero">
@@ -33,9 +45,31 @@ export default function Hero({ totalRaised, onOpenRegister, onOpenDonate }) {
       </div>
 
       <div className="container hero-content">
+        {/* Edition Switcher Pill */}
+        <div className="edition-toggle-bar">
+          <button
+            type="button"
+            className={`edition-tab-btn ${selectedEdition === 'april' ? 'active' : ''}`}
+            onClick={() => onSelectEdition && onSelectEdition('april')}
+          >
+            <span>🌸 April 20 Edition (Two 13M Stretches)</span>
+          </button>
+          <button
+            type="button"
+            className={`edition-tab-btn ${selectedEdition === 'october' ? 'active' : ''}`}
+            onClick={() => onSelectEdition && onSelectEdition('october')}
+          >
+            <span>🍂 October Edition (Quad Loop)</span>
+          </button>
+        </div>
+
         <div className="hero-pill-badge animate-fade-in">
           <span className="pill-dot"></span>
-          <span>San Diego, California • Los Peñasquitos Canyon Preserve</span>
+          <span>
+            {selectedEdition === 'april'
+              ? 'San Diego, California • RACE DATE: APRIL 20 • Los Peñasquitos Canyon'
+              : 'San Diego, California • RACE DATE: OCT 24-25 • Los Peñasquitos Canyon'}
+          </span>
         </div>
 
         <h1 className="hero-title animate-fade-up">
@@ -44,14 +78,21 @@ export default function Hero({ totalRaised, onOpenRegister, onOpenDonate }) {
         </h1>
 
         <p className="hero-lead animate-fade-up delay-1">
-          A one-of-a-kind 100-mile endurance showdown pitting <strong>Ultra Trail Runners</strong> against <strong>Mountain Bikers</strong> across separate race days in San Diego&apos;s legendary PQ Canyon. We made Brice a sacred promise: if depression ever took his life, we&apos;d throw the most relentless, joyous race party in his honor.
+          A one-of-a-kind 100-mile endurance showdown pitting <strong>Ultra Trail Runners</strong> against <strong>Mountain Bikers</strong> in San Diego&apos;s legendary PQ Canyon.
+          {selectedEdition === 'april' ? (
+            <span> The April 20 edition features calibrated <strong>6 to 10 mile aid station spacing</strong> with <strong>two signature 13-mile wilderness stretches</strong>.</span>
+          ) : (
+            <span> Run across separate days to honor Brice Jernigan and raise $100,000 for suicide prevention.</span>
+          )}
         </p>
 
         <div className="hero-disciplines-grid animate-fade-up delay-2">
           <div className="discipline-card mtb-card">
             <div className="card-icon">🚵‍♂️</div>
             <div className="card-meta">
-              <span className="day-tag">SATURDAY • OCT 24, 2026</span>
+              <span className="day-tag">
+                {selectedEdition === 'april' ? 'APRIL 20 • MTB DIVISION' : 'SATURDAY • OCT 24, 2026'}
+              </span>
               <h3>The Spokes: 100M MTB</h3>
               <p>Technical singletrack, punchy fire road grinds, and canyon flow. 14-Hour Cutoff.</p>
             </div>
@@ -60,7 +101,9 @@ export default function Hero({ totalRaised, onOpenRegister, onOpenDonate }) {
           <div className="discipline-card runner-card">
             <div className="card-icon">🏃‍♀️</div>
             <div className="card-meta">
-              <span className="day-tag">SUNDAY • OCT 25, 2026</span>
+              <span className="day-tag">
+                {selectedEdition === 'april' ? 'APRIL 20 • ULTRA DIVISION' : 'SUNDAY • OCT 25, 2026'}
+              </span>
               <h3>The Treads: 100M Ultra</h3>
               <p>Relentless foot endurance over identical canyon terrain & climbs. 30-Hour Cutoff.</p>
             </div>
@@ -78,8 +121,8 @@ export default function Hero({ totalRaised, onOpenRegister, onOpenDonate }) {
             <span>Donate to Suicide Prevention</span>
             <span className="heart-icon">💛</span>
           </button>
-          <a href="#showdown" className="hero-explore-link">
-            <span>See How We Stack Up</span>
+          <a href="#course" className="hero-explore-link">
+            <span>Explore Aid Stations & Course</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
             </svg>
@@ -89,7 +132,7 @@ export default function Hero({ totalRaised, onOpenRegister, onOpenDonate }) {
         <div className="hero-stats-bar glass-panel animate-fade-up delay-4">
           <div className="stat-item">
             <span className="stat-value">{daysLeft}</span>
-            <span className="stat-label">Days to Race Weekend</span>
+            <span className="stat-label">Days to {selectedEdition === 'april' ? 'April 20' : 'Race Weekend'}</span>
           </div>
           <div className="stat-divider"></div>
           <div className="stat-item">
