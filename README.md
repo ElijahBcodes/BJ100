@@ -1,46 +1,62 @@
-# BJ100 (The Brice Jernigan Memorial 100)
+# BJ100 (The Brice Jernigan Memorial 100) — Next.js & React Edition
 
 > **100 Miles. Two Disciplines. One Unbreakable Promise.**  
 > A premier 100-mile endurance showdown pitting **Ultra Trail Runners** against **Mountain Bikers** in San Diego's Los Peñasquitos Canyon (PQ Canyon) to raise money for suicide prevention in honor of Brice Jernigan.
 
----
-
-## 🎗️ Mission & Purpose
-
-Brice Jernigan was an avid mountain biker who found solace, joy, and grit on the trails of Los Peñasquitos Canyon. After a courageous battle with clinical depression, Brice tragically took his own life. 
-
-Before he passed, a sacred promise was made to him: if he ever left this world, we wouldn't let grief have the final say—we would throw the biggest, rowdiest, most relentless race party in his honor.
-
-**100% of event proceeds benefit suicide prevention and mental health support**, funding local San Diego youth outreach and the [988 Suicide & Crisis Lifeline](https://988lifeline.org).
+Built with **Next.js (App Router)** & **React 19**.
 
 ---
 
-## ⚔️ Race Concept: Runners vs. Mountain Bikers
+## 🚀 Quick Start (Local Development)
 
-To maintain trail integrity and athlete safety, the disciplines compete on separate days:
-- **Saturday:** The Spokes (100-Mile MTB Challenge, 14-Hour Cutoff)
-- **Sunday:** The Treads (100-Mile Ultra Marathon, 30-Hour Cutoff)
-- **The "Brice Index" Handicap Showdown:** Racers opt-in to compete head-to-head on a calibrated `2.15x` course ratio for the unified Memorial Crown.
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Run local dev server
+npm run dev
+
+# 3. Open in browser
+# Visit http://localhost:3000
+```
+
+To create an optimized production build:
+```bash
+npm run build
+npm run start
+```
 
 ---
 
-## 🚀 Features
+## ⚡ Deployment to Vercel / Next.js
 
-- **Interactive Showdown Calculator:** Test and compare mountain bike vs. ultra runner splits with real-time gap differentials and dead-heat matching.
-- **Interactive 4-Segment Course Map:** Elevation profiles and aid stations across PQ Canyon, Del Mar Mesa, and Black Mountain (+11,480' vert).
-- **Interactive 100-Mile Dedication Grid:** Sponsor individual miles along the race loop with custom tributes ($100 each).
-- **Community Tribute Wall:** Filterable memories of Brice and messages of hope.
-- **Brice's Race Party:** Live festival details (Baja tacos, SD craft beer garden, live music, sunset toast).
-- **Immediate Crisis Support:** Integrated 24/7 988 Lifeline and San Diego crisis resources.
+This branch is 100% standard Next.js App Router. You can deploy it in seconds:
+
+1. Import this repository [`ElijahBcodes/BJ100`](https://github.com/ElijahBcodes/BJ100) into [Vercel](https://vercel.com).
+2. Set the Branch to `react-nextjs`.
+3. Vercel automatically detects Next.js (`npm run build`). Click **Deploy**!
 
 ---
 
-## 💻 Tech Stack
+## 🧩 React Component Architecture
 
-- Semantic HTML5 with Open Graph SEO metadata
-- Vanilla CSS3 (Custom design system, glassmorphism, responsive mobile layouts)
-- Vanilla JavaScript (Calculator logic, local storage persistence, accessible modal dialogs)
-- No build step required — open `index.html` in any modern web browser or serve with static HTTP server.
+- `src/app/page.jsx` — Main reactive controller managing donations, tributes, and modals.
+- `src/app/layout.jsx` — Root layout with Open Graph metadata and Google Fonts (`Outfit`, `Plus Jakarta Sans`, `Rock Salt`).
+- `src/app/globals.css` — Custom canyon-sunset design tokens, glassmorphism, responsive grid.
+- `src/components/CrisisBar.jsx` — 24/7 Suicide Prevention banner & quick-dial 988.
+- `src/components/Header.jsx` — Responsive navigation with animated bike spoke logo.
+- `src/components/Hero.jsx` — Hero section with dynamic countdown and live stats bar.
+- `src/components/PromiseMemorial.jsx` — Heart of the race honoring Brice's life in PQ Canyon.
+- `src/components/ShowdownSection.jsx` — Saturday Spokes vs. Sunday Treads breakdown.
+- `src/components/CalculatorSection.jsx` — Interactive "Brice Index" Showdown Calculator with dual sliders & equalizer.
+- `src/components/CourseSection.jsx` — 4-segment PQ Canyon course elevation switcher with interactive SVG profiles.
+- `src/components/RaceParty.jsx` — Brice's Big Race Party festival features.
+- `src/components/FundraiserSection.jsx` — Suicide prevention fund meter and interactive 100-mile dedication grid.
+- `src/components/TributeSection.jsx` — Filterable community tribute wall with persistence.
+- `src/components/RegistrationSection.jsx` — Registration categories & showdown opt-in.
+- `src/components/FAQSection.jsx` — Collapsible interactive accordion.
+- `src/components/CrisisCallout.jsx` — 24/7 crisis support contact banner.
+- `src/components/Modals.jsx` — Registration, Donation, Tribute, Sponsor-a-mile, and Crisis support dialogs.
 
 ---
 
