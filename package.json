@@ -1,0 +1,28 @@
+{
+  "name": "bj100",
+  "version": "1.0.0",
+  "description": "> **100 Miles. Two Disciplines. One Unbreakable Promise.**   > A premier 100-mile endurance showdown pitting **Ultra Trail Runners** against **Mountain Bikers** in San Diego's Los Peñasquitos Canyon (PQ Canyon) to raise money for suicide prevention in honor of Brice Jernigan.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElijahBcodes/BJ100.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ElijahBcodes/BJ100/issues"
+  },
+  "homepage": "https://github.com/ElijahBcodes/BJ100#readme",
+  "dependencies": {
+    "lucide-react": "^1.55.0",
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  }
+}

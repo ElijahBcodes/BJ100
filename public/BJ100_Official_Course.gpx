@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="The Brice Jernigan 100 Official Course Navigator" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>The Brice Jernigan 100 - Official 100-Mile Course</name>
+    <desc>100 Miles in San Diego's Los Peñasquitos Canyon and Black Mountain. Honoring Brice Jernigan.</desc>
+    <link href="https://github.com/ElijahBcodes/BJ100"/>
+  </metadata>
+  <wpt lat="32.9298" lon="-117.1472">
+    <ele>48</ele>
+    <name>Start/Finish - Canyonside Park</name>
+    <desc>Main staging, festival area, and race headquarters.</desc>
+  </wpt>
+  <wpt lat="32.9241" lon="-117.1895">
+    <ele>95</ele>
+    <name>Aid 1 / Carson's Crossing</name>
+    <desc>Mile 6.2 and Mile 14.8. Water, Tailwind, PB&amp;J, Drop bags.</desc>
+  </wpt>
+  <wpt lat="32.9215" lon="-117.2050">
+    <ele>62</ele>
+    <name>Peñasquitos Waterfall</name>
+    <desc>Mile 10.4. Iconic rocky canyon cascade.</desc>
+  </wpt>
+  <wpt lat="32.9090" lon="-117.1720">
+    <ele>410</ele>
+    <name>Del Mar Mesa Tunnels</name>
+    <desc>Mile 28.5. Technical sandstone singletrack.</desc>
+  </wpt>
+  <wpt lat="32.9818" lon="-117.1205">
+    <ele>1554</ele>
+    <name>Black Mountain Summit</name>
+    <desc>Mile 63.8. Highest point of course, 360 Pacific views.</desc>
+  </wpt>
+  <wpt lat="32.9340" lon="-117.1610">
+    <ele>240</ele>
+    <name>Brice's Memorial Lookout Bench</name>
+    <desc>Mile 92.0. Memorial trail bell and scenic sunset canyon overlook.</desc>
+  </wpt>
+  <trk>
+    <name>BJ100 Full 100-Mile Quad Loop</name>
+    <trkseg>
+      <trkpt lat="32.9298" lon="-117.1472"><ele>48</ele></trkpt>
+      <trkpt lat="32.9280" lon="-117.1550"><ele>55</ele></trkpt>
+      <trkpt lat="32.9265" lon="-117.1680"><ele>68</ele></trkpt>
+      <trkpt lat="32.9241" lon="-117.1895"><ele>95</ele></trkpt>
+      <trkpt lat="32.9215" lon="-117.2050"><ele>62</ele></trkpt>
+      <trkpt lat="32.9150" lon="-117.1950"><ele>210</ele></trkpt>
+      <trkpt lat="32.9090" lon="-117.1720"><ele>410</ele></trkpt>
+      <trkpt lat="32.9350" lon="-117.1520"><ele>180</ele></trkpt>
+      <trkpt lat="32.9550" lon="-117.1350"><ele>520</ele></trkpt>
+      <trkpt lat="32.9818" lon="-117.1205"><ele>1554</ele></trkpt>
+      <trkpt lat="32.9650" lon="-117.1300"><ele>640</ele></trkpt>
+      <trkpt lat="32.9340" lon="-117.1610"><ele>240</ele></trkpt>
+      <trkpt lat="32.9298" lon="-117.1472"><ele>48</ele></trkpt>
+    </trkseg>
+  </trk>
+</gpx>
