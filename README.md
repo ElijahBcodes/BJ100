@@ -1,9 +1,19 @@
-# BJ100 (The Brice Jernigan Memorial 100) — Next.js & React Edition
+# BJ100 (The Brice Jernigan Memorial 100) — Next.js & Topographical Map Edition
 
 > **100 Miles. Two Disciplines. One Unbreakable Promise.**  
 > A premier 100-mile endurance showdown pitting **Ultra Trail Runners** against **Mountain Bikers** in San Diego's Los Peñasquitos Canyon (PQ Canyon) to raise money for suicide prevention in honor of Brice Jernigan.
 
 Built with **Next.js (App Router)** & **React 19**.
+
+---
+
+## 🗺️ New: Interactive Topographical Trail Map
+
+This branch features an official **Topographical Trail Map View** of the 100-mile course:
+- High-resolution cartographic map with contour lines and elevation shading of Los Peñasquitos Canyon, Del Mar Mesa, and Black Mountain.
+- Interactive **Waypoints Dossier**: Clickable waypoints detailing Carson's Crossing, Peñasquitos Waterfall, Del Mar Mesa Tunnels, Black Mountain Summit (1,554 ft), and Brice's Memorial Lookout Bench.
+- **Official GPX Download**: Direct download button for `BJ100_Official_Course.gpx` for GPS watches, Garmin, and bike computers.
+- Master Toggle between **Topographical Trail Map View** and **Elevation Profile & Segment Breakdown**.
 
 ---
 
@@ -28,35 +38,11 @@ npm run start
 
 ---
 
-## ⚡ Deployment to Vercel / Next.js
-
-This branch is 100% standard Next.js App Router. You can deploy it in seconds:
+## ⚡ Deployment to Vercel
 
 1. Import this repository [`ElijahBcodes/BJ100`](https://github.com/ElijahBcodes/BJ100) into [Vercel](https://vercel.com).
-2. Set the Branch to `react-nextjs`.
+2. Set the Branch to `course-topo-map`.
 3. Vercel automatically detects Next.js (`npm run build`). Click **Deploy**!
-
----
-
-## 🧩 React Component Architecture
-
-- `src/app/page.jsx` — Main reactive controller managing donations, tributes, and modals.
-- `src/app/layout.jsx` — Root layout with Open Graph metadata and Google Fonts (`Outfit`, `Plus Jakarta Sans`, `Rock Salt`).
-- `src/app/globals.css` — Custom canyon-sunset design tokens, glassmorphism, responsive grid.
-- `src/components/CrisisBar.jsx` — 24/7 Suicide Prevention banner & quick-dial 988.
-- `src/components/Header.jsx` — Responsive navigation with animated bike spoke logo.
-- `src/components/Hero.jsx` — Hero section with dynamic countdown and live stats bar.
-- `src/components/PromiseMemorial.jsx` — Heart of the race honoring Brice's life in PQ Canyon.
-- `src/components/ShowdownSection.jsx` — Saturday Spokes vs. Sunday Treads breakdown.
-- `src/components/CalculatorSection.jsx` — Interactive "Brice Index" Showdown Calculator with dual sliders & equalizer.
-- `src/components/CourseSection.jsx` — 4-segment PQ Canyon course elevation switcher with interactive SVG profiles.
-- `src/components/RaceParty.jsx` — Brice's Big Race Party festival features.
-- `src/components/FundraiserSection.jsx` — Suicide prevention fund meter and interactive 100-mile dedication grid.
-- `src/components/TributeSection.jsx` — Filterable community tribute wall with persistence.
-- `src/components/RegistrationSection.jsx` — Registration categories & showdown opt-in.
-- `src/components/FAQSection.jsx` — Collapsible interactive accordion.
-- `src/components/CrisisCallout.jsx` — 24/7 crisis support contact banner.
-- `src/components/Modals.jsx` — Registration, Donation, Tribute, Sponsor-a-mile, and Crisis support dialogs.
 
 ---
 

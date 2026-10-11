@@ -7,3 +7,4 @@ build/
 scratch/
 .system_generated/
 .env*.local
+.vercel
